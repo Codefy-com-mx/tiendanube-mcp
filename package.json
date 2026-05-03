@@ -2,12 +2,22 @@
   "name": "tiendanube-mcp",
   "version": "1.0.0",
   "description": "MCP server for Tiendanube/Nuvemshop REST API documentation",
+  "author": "Kedap",
+  "keywords": ["mcp", "tiendanube", "nuvemshop", "api"],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "files": ["dist", "docs", "README.md", "LICENSE"],
   "main": "dist/index.js",
   "bin": {
     "tiendanube-mcp": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
+    "postbuild": "chmod +x dist/index.js",
+    "prepublishOnly": "npm run build",
     "dev": "tsc --watch",
     "start": "node dist/index.js"
   },
@@ -22,6 +32,5 @@
   "type": "module",
   "engines": {
     "node": ">=18"
-  },
-  "license": "MIT"
+  }
 }

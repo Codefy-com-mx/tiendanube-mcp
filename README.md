@@ -4,15 +4,31 @@ Servidor MCP de documentación para la API REST de [Tiendanube](https://www.tien
 
 Permite a Claude y otros LLMs consultar la documentación de la API sin salir del contexto: recursos disponibles, endpoints, campos de objetos, autenticación OAuth, webhooks y más.
 
-## Tools disponibles
+## Recursos y tools disponibles
 
-| Tool | Descripción |
-|------|-------------|
-| `search_resources` | Lista y filtra los recursos de la API (Products, Orders, Customers, etc.) |
-| `get_resource_detail` | Documentación completa de un recurso: endpoints, parámetros, campos y ejemplos |
-| `search_endpoints` | Busca endpoints por método HTTP (GET/POST/PUT/DELETE) o texto |
-| `get_authentication_info` | Flujo OAuth 2.0, headers requeridos, scopes y rate limiting |
-| `list_webhooks` | Eventos disponibles, formato del payload y gestión de webhooks |
+### Tool
+
+| Tool          | Descripción                                                                                                                   |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `search_docs` | Busca un término en todos los archivos de documentación y devuelve fragmentos relevantes con la URI para leer el doc completo |
+
+### MCP Resources
+
+Cada recurso de la API tiene su propio archivo de documentación accesible como MCP Resource:
+
+| URI                                 | Contenido                                                  |
+| ----------------------------------- | ---------------------------------------------------------- |
+| `tiendanube://docs/list`            | Índice JSON de todos los recursos disponibles con sus URIs |
+| `tiendanube://docs/product`         | Productos: propiedades, endpoints, filtros, ejemplos       |
+| `tiendanube://docs/order`           | Órdenes: estados, filtros, fulfillments                    |
+| `tiendanube://docs/customer`        | Clientes: propiedades, direcciones                         |
+| `tiendanube://docs/webhook`         | Webhooks: eventos disponibles, payload, verificación       |
+| `tiendanube://docs/category`        | Categorías y subcategorías                                 |
+| `tiendanube://docs/product-variant` | Variantes de productos                                     |
+| `tiendanube://docs/checkout`        | Checkout: flujo y campos                                   |
+| `tiendanube://docs/coupons`         | Cupones de descuento                                       |
+| `tiendanube://docs/metafields`      | Metafields para extender recursos                          |
+| `tiendanube://docs/...`             | 30+ recursos en total                                      |
 
 ## Instalación
 
@@ -29,7 +45,11 @@ npm install
 npm run build
 ```
 
-## Configuración en Claude Desktop
+## Configuración por cliente
+
+Reemplazar `/ruta/absoluta/a/tiendanube-mcp` con la ruta real del repositorio clonado.
+
+### Claude Desktop
 
 Editar `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
 
@@ -44,13 +64,60 @@ Editar `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 }
 ```
 
-## Configuración en Claude Code
+### Claude Code
 
 ```bash
 claude mcp add tiendanube node /ruta/absoluta/a/tiendanube-mcp/dist/index.js
 ```
 
-O agregando a `~/.claude/mcp.json`:
+O en `~/.claude/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "tiendanube": {
+      "command": "node",
+      "args": ["/ruta/absoluta/a/tiendanube-mcp/dist/index.js"]
+    }
+  }
+}
+```
+
+### Gemini CLI
+
+Editar `~/.gemini/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "tiendanube": {
+      "command": "node",
+      "args": ["/ruta/absoluta/a/tiendanube-mcp/dist/index.js"]
+    }
+  }
+}
+```
+
+### OpenCode
+
+Editar `~/.config/opencode/config.json` o crear `opencode.json` en la raíz del proyecto:
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "tiendanube": {
+        "command": "node",
+        "args": ["/ruta/absoluta/a/tiendanube-mcp/dist/index.js"]
+      }
+    }
+  }
+}
+```
+
+### Antigravity
+
+Editar `~/.antigravity/config.json`:
 
 ```json
 {
@@ -67,24 +134,15 @@ O agregando a `~/.claude/mcp.json`:
 
 Una vez configurado, en Claude puedes preguntar:
 
-- *"¿Cómo autentico mi app con la API de Tiendanube?"*
-- *"¿Qué campos tiene el objeto Product?"*
-- *"¿Cómo filtro órdenes por estado de pago?"*
-- *"Muéstrame los webhooks disponibles de Tiendanube"*
-- *"¿Cómo creo un cupón de descuento por porcentaje?"*
+- _"¿Cómo autentico mi app con la API de Tiendanube?"_
+- _"¿Qué campos tiene el objeto Product?"_
+- _"¿Cómo filtro órdenes por estado de pago?"_
+- _"Muéstrame los webhooks disponibles de Tiendanube"_
+- _"¿Cómo creo un cupón de descuento por porcentaje?"_
 
-## Recursos cubiertos
+## Recursos cubiertos (documentación oficial Nuvemshop)
 
-- Store (tienda)
-- Products / Product Variants
-- Categories
-- Orders
-- Customers
-- Webhooks
-- Metafields
-- Script Tags
-- Abandoned Checkouts
-- Coupons
+Abandoned Checkout · Billing · Blog · Business Rules · Cart · Category · Category Custom Fields · Checkout · Checkout SDK · Coupons · Customer · Customer Custom Fields · Discount · Draft Order · Email Templates · Fulfillment Order · Location · Metafields · Order · Order Custom Fields · Pages · Payment Option · Payment Provider · Product · Product Custom Fields · Product Image · Product Variant · Product Variant Custom Fields · Scripts · Shipping Carrier · Store · Transaction · Webhook
 
 ## Desarrollo
 

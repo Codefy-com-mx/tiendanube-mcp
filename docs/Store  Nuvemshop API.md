@@ -1,0 +1,7 @@
+The Store resource contains general settings and information about a Tiendanube/Nuvemshop's store.
+
+Receive a single Store.
+
+```
+{  "address": null,  "admin_language": "pt",  "blog": null,  "business_id": null,  "business_name": null,  "business_address": null,  "contact_email": "contact@pokestore.com",  "country": "BR",  "created_at": "2013-01-01T05:12:51-03:00",  "customer_accounts": "optional",  "description": {      "en": "",      "es": "",      "pt": ""  },  "domains": [    "www.pokestore.com",    "www.another.com"  ],  "email": "owner@pokestore.com",  "facebook": "http://www.facebook.com/pokestore",  "google_plus": "http://plus.google.com/+pokestore",  "id": 1234,  "instagram": "http://www.instagram.com/pokestore",  "languages": {    "en": {      "currency" : "USD",      "active": true    },    "es": {      "currency" : "ARS",      "active": false    },    "pt": {      "currency" : "BRL",      "active": true    }  },  "logo": "//d26lpennugtm8s.cloudfront.net/stores/046/themes/common/logo-ff622335866ee56df3bceed2e9d41469.png",  "main_currency": "BRL",  "current_theme": "luxury",  "main_language": "pt",  "name": {      "en": "Poké Store",      "es": "Poké Tienda",      "pt": "Poké Loja"  },  "original_domain" : "pokeloja.nuvemshop.com.br",  "phone": null,  "whatsapp_phone_number": null,  "pinterest": "http://www.pinterest.com/pokestore",  "plan_name": "Business",  "type": null,  "twitter": "http://www.twitter.com/pokestore",  "features": [    "fulfillment-orders",    "inventory-levels"  ]}
+```

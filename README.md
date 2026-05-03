@@ -2,7 +2,7 @@
 
 Servidor MCP de documentación para la API REST de [Tiendanube](https://www.tiendanube.com) / [Nuvemshop](https://www.nuvemshop.com.br).
 
-Permite a Claude y otros LLMs consultar la documentación de la API sin salir del contexto: recursos disponibles, endpoints, campos de objetos, autenticación OAuth, webhooks y más.
+Permite a tu agente de IA consultar la documentación de la API sin salir del contexto: recursos disponibles, endpoints, campos de objetos, autenticación OAuth, webhooks y más.
 
 ## Recursos y tools disponibles
 
@@ -49,28 +49,17 @@ npm run build
 
 Reemplazar `/ruta/absoluta/a/tiendanube-mcp` con la ruta real del repositorio clonado.
 
-### Claude Desktop
-
-Editar `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
-
-```json
-{
-  "mcpServers": {
-    "tiendanube": {
-      "command": "node",
-      "args": ["/ruta/absoluta/a/tiendanube-mcp/dist/index.js"]
-    }
-  }
-}
-```
-
-### Claude Code
+### OpenCode / Claude Code / Otros agentes
 
 ```bash
+# Claude Code
 claude mcp add tiendanube node /ruta/absoluta/a/tiendanube-mcp/dist/index.js
+
+# OpenCode
+opencode mcp add tiendanube node /ruta/absoluta/a/tiendanube-mcp/dist/index.js
 ```
 
-O en `~/.claude/mcp.json`:
+O en el archivo de configuración MCP de tu agente (por ejemplo `~/.claude/mcp.json`, `~/.config/opencode/config.json`, etc.):
 
 ```json
 {
@@ -132,7 +121,7 @@ Editar `~/.antigravity/config.json`:
 
 ## Ejemplos de uso
 
-Una vez configurado, en Claude puedes preguntar:
+Una vez configurado, en tu agente de IA puedes preguntar:
 
 - _"¿Cómo autentico mi app con la API de Tiendanube?"_
 - _"¿Qué campos tiene el objeto Product?"_
